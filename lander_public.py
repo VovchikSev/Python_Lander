@@ -2,6 +2,7 @@
 #by MaGBY (Making Games By Year)
 #For Episode Zero (Pilot, 1969)
 #wow, this is a real game at this point!
+# Получилось вполне работоспособно, осталось перевести на нормальную версию Python
 
 def printFileContents(fileStr, missingFileMessage = None):
 
@@ -10,9 +11,9 @@ def printFileContents(fileStr, missingFileMessage = None):
     
     try:
         with open(fileStr) as fo:
-            print fo.read()
+            print (fo.read())
     except:
-        print missingFileMessage
+        print (missingFileMessage)
         pass
 
 class LanderGame (object):
@@ -87,7 +88,7 @@ You search for the right words, the most profound thing to say to commemorate th
 
         velocityMag = abs(self.landerVelocity)
 
-        print "\n\nYour touchdown velocity is : %d (m/s)\n\n" % (velocityMag)
+        print ("\n\nYour touchdown velocity is : %d (m/s)\n\n" % (velocityMag))
 
         if velocityMag <= LanderGame.PerfectTouchdownVelocity:
             self.gameOutroWin()
@@ -97,18 +98,18 @@ You search for the right words, the most profound thing to say to commemorate th
             self.gameOutroStranded()
         else:
             #worst case loss scenario
-            print "Your inept piloting causes the lander to crash into the lunar surface way too fast.  There were no survivors"
-            print "In fact, your create a new crater {:.3f} meters deep!".format(self.velocityToCraterDepthMeters(self.landerVelocity))
-            print "The population of the Earth mourns you and your crew as heroes and pioneers."
+            print ("Your inept piloting causes the lander to crash into the lunar surface way too fast.  There were no survivors")
+            print ("In fact, your create a new crater {:.3f} meters deep!".format(self.velocityToCraterDepthMeters(self.landerVelocity)))
+            print ("The population of the Earth mourns you and your crew as heroes and pioneers.")
 
 
     def printInstructions(self):
-        print "Instructions\n=============================\nYou quickly remember your training."
-        print "\nYou will get a chance to adjust the thrust of the lander every %.2f seconds." %(LanderGame.DeltaTimeSeconds)
-        print "You adjust the thrusters by selecting a fuel burn rate.  Zero is freefall, or pick a fuel burn rate from %.2f to %.2f kg/second" %(LanderGame.MinimumLanderFuelBurnRate, LanderGame.MaximumLanderFuelBurnRate)
-        print "\nYour ship without fuel has a mass of %.2f kg.  You currently have %.2f kg of fuel.  For those of you astronauts that are bad at math, that's a total of %.2f kg.  Accelerating the lander will get easier as you burn more fuel" % (LanderGame.LanderEmptyMass, self.landerFuel, self.landerTotalMass())
-        print "You have an ideal safe landing velocity of %.2f m/s " %(LanderGame.PerfectTouchdownVelocity)
-        print "\nGood luck!"
+        print ("Instructions\n=============================\nYou quickly remember your training.")
+        print ("\nYou will get a chance to adjust the thrust of the lander every %.2f seconds." %(LanderGame.DeltaTimeSeconds))
+        print ("You adjust the thrusters by selecting a fuel burn rate.  Zero is freefall, or pick a fuel burn rate from %.2f to %.2f kg/second" %(LanderGame.MinimumLanderFuelBurnRate, LanderGame.MaximumLanderFuelBurnRate))
+        print ("\nYour ship without fuel has a mass of %.2f kg.  You currently have %.2f kg of fuel.  For those of you astronauts that are bad at math, that's a total of %.2f kg.  Accelerating the lander will get easier as you burn more fuel" % (LanderGame.LanderEmptyMass, self.landerFuel, self.landerTotalMass()))
+        print ("You have an ideal safe landing velocity of %.2f m/s " %(LanderGame.PerfectTouchdownVelocity))
+        print ("\nGood luck!")
     
     def gameIntro(self) :
         printFileContents("game_introfile.txt", LanderGame.DefaultIntroStory)
@@ -119,21 +120,21 @@ You search for the right words, the most profound thing to say to commemorate th
 
         message = "At long last, you speak the historic words :"
 
-        raw_input(message)
+        input(message)
 
     def gameOutroWin(self):
         printFileContents("game_win.txt", LanderGame.DefaultWinStory)
 
         message = "At long last, you speak the historic words :"
 
-        raw_input(message)
+        input(message)
 
     def gameOutroWinDecent(self):
         printFileContents("game_win_decent.txt", LanderGame.DefaultOkayStory)
 
         message = "At long last, you speak the historic words :"
 
-        raw_input(message)
+        input(message)
         
     def __init__(self) :
         
@@ -149,8 +150,8 @@ You search for the right words, the most profound thing to say to commemorate th
         self.gameIntro()
 
     def displayGameState(self) :
-        print '\n{0:15}{1:15}{2:15}{3:15}{4:15}'.format("Time(s)", "Height(m)", "Velocity(m/s)", "Fuel(kg)", "Total Mass (kg)")
-        print '{0:15}{1:15}{2:15}{3:15}{4:15}'.format(str(self.missionTime), str(self.landerHeight), str(self.landerVelocity), str(self.landerFuel), str(self.landerTotalMass()))
+        print ('\n{0:15}{1:15}{2:15}{3:15}{4:15}'.format("Time(s)", "Height(m)", "Velocity(m/s)", "Fuel(kg)", "Total Mass (kg)"))
+        print ('{0:15}{1:15}{2:15}{3:15}{4:15}'.format(str(self.missionTime), str(self.landerHeight), str(self.landerVelocity), str(self.landerFuel), str(self.landerTotalMass())))
         
 
     def handleInput(self):
@@ -161,7 +162,7 @@ You search for the right words, the most profound thing to say to commemorate th
         
         message = "\nEnter your fuel burn rate (or type quit)"
         
-        inputStr = raw_input(message)
+        inputStr = input(message)
 
         while True:
 
@@ -179,20 +180,20 @@ You search for the right words, the most profound thing to say to commemorate th
                             return
                         else:
                             if faccel > 0.0: #nonzero but invalid thrust : print a message
-                                print "That's below minimum thrust of %.2f -- turning thrusters off!" % (LanderGame.MinimumLanderFuelBurnRate)
+                                print ("That's below minimum thrust of %.2f -- turning thrusters off!" % (LanderGame.MinimumLanderFuelBurnRate))
 
                             self.currentBurnRate = 0.0
                             return
                     else:
                         self.currentBurnRate = LanderGame.MaximumLanderFuelBurnRate
-                        print "No can do, but I'll assume you mean maximum burn rate of %.2f" %(self.currentBurnRate)
+                        print ("No can do, but I'll assume you mean maximum burn rate of %.2f" %(self.currentBurnRate))
                         return
                 else:
-                    print "Please enter a *positive* number!" 
+                    print ("Please enter a *positive* number!" )
             except:
-                print "Please enter a number or type quit!"
+                print ("Please enter a number or type quit!")
 
-            inputStr = raw_input(message)
+            inputStr = input(message)
 
     def getFuelBurned(self, burnRate, time):
         return min(burnRate*time, self.landerFuel)
@@ -217,7 +218,7 @@ You search for the right words, the most profound thing to say to commemorate th
         self.landerFuel -= fuelBurned
 
         if fuelBurned != 0 and self.landerFuel == 0:
-            print "Oh crap, you're out of fuel!"
+            print ("Oh crap, you're out of fuel!")
 
         accelerationFromThrust = self.getAccelerationFromThrust(fuelBurned)
 
@@ -257,7 +258,7 @@ while not quitProgram:
     while True:
         playAgainMessage = "Would you like to play again?"
 
-        playAgain = raw_input(playAgainMessage).lower()
+        playAgain = input(playAgainMessage).lower()
 
         if playAgain == 'y' or playAgain == 'yes':
             break
@@ -265,8 +266,8 @@ while not quitProgram:
             quitProgram = True
             break
         else:
-            print "come again?"
+            print ("come again?")
             continue
     
-    print "Thanks for playing!"
+    print ("Thanks for playing!")
     

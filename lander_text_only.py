@@ -1,7 +1,7 @@
 #
 # -------LUNAR LANDER-------
 # (it's a oldie but a goodie)
-#
+# перевести эту версию на ООП 
 def main():
            
     def chooseDifficulty():
