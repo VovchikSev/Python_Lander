@@ -25,7 +25,9 @@ class Lander(object):
     @property
     def current_burn_rate(self):
         return self.__current_burn_rate
-
+    @current_burn_rate.setter
+    def current_burn_rate(self):
+        pass
     @property
     def height(self):
         return self.__height
@@ -76,10 +78,11 @@ class Game(object):
                 return
             try:
                 f_accel = float(in_str)
-                if f_accel >= 0.0:
-                    pass
-                else:
-                    pass
+                self.lander.current_burn_rate(f_accel)
+                # if f_accel >= 0.0:
+                #     pass
+                # else:
+                #     pass
             except:
                 print('Пожалуйста, введите число или введите quit!')
             in_str = input(information_message)
