@@ -25,9 +25,11 @@ class Lander(object):
     @property
     def current_burn_rate(self):
         return self.__current_burn_rate
+
     @current_burn_rate.setter
-    def current_burn_rate(self):
-        pass
+    def current_burn_rate(self, burn_rate: float):
+        self.__current_burn_rate = burn_rate
+
     @property
     def height(self):
         return self.__height
@@ -47,9 +49,9 @@ class Lander(object):
     @property
     def total_mass(self):
         return self.empty_mass + self.__fuel
-    
+
     def set_burn_rate(self, burn_rate):
-        self.__fuel -= burn_rate # нужно вычислть затраченное толиво на шаг времени в секундах
+        self.__fuel -= burn_rate  # нужно вычислить затраченное топливо на шаг времени в секундах
 
 
 class Game(object):
